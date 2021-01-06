@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { ItensCarrinho } from "../itensCarrinho";
-import { AsideS, Block, Row, ButtonAdd, ButtonDel, ButtonS } from "./styles";
+import { AsideS, Block, Row, ButtonAdd, ButtonSub, ButtonDel } from "./styles";
 
 export default function Carrinho() {
 	const [CartItems, setCartItems] = useContext(ItensCarrinho);
 	const itemsPrice = CartItems.reduce((a, c) => a + c.preco * c.qtd, 0);
 	const shippingPrice = itemsPrice > 2000 ? 0 : 50;
 	const totalPrice = itemsPrice + shippingPrice;
+
 	const handleAdd = (produto) => {
 		const exist = CartItems.find((x) => x.id === produto.id);
 		if (exist) {
@@ -19,6 +20,27 @@ export default function Carrinho() {
 			setCartItems([...CartItems, { ...produto, qtd: 1 }]);
 		}
 	};
+
+	const handleSub = (produto) => {
+		const exist = CartItems.find((x) => x.id === produto.id);
+		if (exist.qtd === 1) {
+			setCartItems(CartItems.filter((x) => x.id !== produto.id));
+		} else {
+			setCartItems(
+				CartItems.map((x) =>
+					x.id === produto.id ? { ...exist, qtd: exist.qtd - 1 } : x
+				)
+			);
+		}
+	};
+
+	const handleDel = (produto) => {
+		const exist = CartItems.find((x) => x.id === produto.id);
+		if (exist) {
+			setCartItems(CartItems.filter((x) => x.id !== produto.id));
+		}
+	};
+
 	return (
 		<>
 			<AsideS>
@@ -30,6 +52,8 @@ export default function Carrinho() {
 							<div>{item.nome}</div>
 							<div>
 								<ButtonAdd onClick={() => handleAdd(item)}>+</ButtonAdd>
+								<ButtonSub onClick={() => handleSub(item)}>-</ButtonSub>
+								<ButtonDel onClick={() => handleDel(item)}>DEL</ButtonDel>
 							</div>
 							<div>
 								{item.qtd} X R${item.preco.toFixed(2)}

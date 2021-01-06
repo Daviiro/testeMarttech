@@ -64,9 +64,14 @@ export const ButtonAdd = styled(ButtonS)`
 	width: 1.5rem;
 `;
 
-export const ButtonDel = styled(ButtonS)`
+export const ButtonSub = styled(ButtonS)`
 	background-color: #f04040;
 	width: 1.5rem;
+`;
+
+export const ButtonDel = styled(ButtonS)`
+	background-color: #f6f6f6;
+	width: 2rem;
 `;
 
 export const ButtonBadge = styled(ButtonS)`
