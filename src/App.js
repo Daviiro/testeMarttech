@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Compra from "./pages/compra";
+import Confirma from "./pages/confirma";
+import { Container } from "./components/styles";
+import { ItensProvider } from "./itensCarrinho";
+import Cesta from "./pages/cesta";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Container>
+			<Router>
+				<ItensProvider>
+					<Route exact={true} path='/' component={Compra}>
+						<Compra />
+					</Route>
+					<Route exact path='/confirma' component={Confirma}></Route>
+					<Route exact path='/cesta' component={Cesta}></Route>
+				</ItensProvider>
+			</Router>
+		</Container>
+	);
 }
 
 export default App;
