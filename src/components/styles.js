@@ -85,3 +85,13 @@ export const IputS = styled.input`
 	margin-bottom: 15px;
 	border-radius: 5px;
 `;
+
+export const InputNome = styled.input`
+	margin-bottom: 15px;
+	border-radius: 5px;
+`;
+
+export const InputCPF = styled(InputNome)`
+	margin-bottom: 15px;
+	border-radius: 5px;
+`;
